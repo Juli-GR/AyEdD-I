@@ -1,5 +1,7 @@
 --Nombre Apellido, año, Comisión x
 
+--El enunciado dice q se usa aplicación parcial, cuando?
+
 --EJERCICIO 1-----------------------------------------------
 
 esCero :: Int -> Bool
@@ -29,8 +31,12 @@ productoria [] = 1
 productoria (x:xs) = x * (productoria xs)
 
 factorial :: Int -> Int
-factorial n | (n == 1) = 1
-            | (n > 1) = n * (factorial (n-1))
+factorial 0 = 1
+factorial n = n * (factorial (n-1))         --Si <0, infinitamente, o uso la de abajo?
+
+--factorial :: Int -> Int
+--factorial n | (n == 1) = 1
+--            | (n > 1) = n * (factorial (n-1))
 
 promedio :: [Int] -> Int
 promedio xs = div (sumatoria xs) (length xs)
@@ -72,8 +78,8 @@ pertenece a (x:xs)  | (a == x) = True
 
 --EJERCICIO 5-----------------------------------------------
 
-paratodo :: [a] -> (a -> Bool) -> Bool
-paratodo xs f = paratodo' xs f                  --Era esta la idea? medio inutil
+paratodo :: [Bool] -> Bool
+paratodo xs = paratodo' xs id
 
 
 
@@ -86,11 +92,10 @@ todosPares xs = paratodo' xs (even)
 hayMultiplo :: Int -> [Int] -> Bool
 hayMultiplo n xs = existe' (map (`mod` n) xs) (==0)
 --Se usó `mod` que invierte las variables,
---pero se podría haber definido una función para ello.
+--pero se podría haber definido una función para ello
 
 sumaCuadrados :: Int -> Int
 sumaCuadrados n = sumatoria' [0..n-1] (^2)
---Se usó ^, y no se por que xd
 
 factorial' :: Int -> Int    --Usa recursion pero no justo acá(?)
 factorial' n = productoria [1..n]
