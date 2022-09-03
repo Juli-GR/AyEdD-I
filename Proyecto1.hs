@@ -30,9 +30,9 @@ productoria :: [Int] -> Int
 productoria [] = 1
 productoria (x:xs) = x * (productoria xs)
 
-factorial :: Int -> Int
-factorial 0 = 1
-factorial n = n * (factorial (n-1))         --Si <0, infinitamente, o uso la de abajo?
+--factorial :: Int -> Int           --(reemplazada en ejercicio 6)
+--factorial 0 = 1
+--factorial n = n * (factorial (n-1))         --Si <0, infinitamente, o uso la de abajo?
 
 --factorial :: Int -> Int
 --factorial n | (n == 1) = 1
@@ -56,7 +56,7 @@ pertenece a (x:xs)  | (a == x) = True
 
 
 --EJERCICIO 4-----------------------------------------------
-
+--Reemplazadas en ejercicio 12
 
 --paratodo' :: [a] -> (a -> Bool) -> Bool
 --paratodo' [] f = True
@@ -97,11 +97,11 @@ hayMultiplo n xs = existe' (map (`mod` n) xs) (==0)
 sumaCuadrados :: Int -> Int
 sumaCuadrados n = sumatoria' [0..n-1] (^2)
 
-factorial' :: Int -> Int    --Usa recursion pero no justo acá(?)
-factorial' n = productoria [1..n]
+factorial :: Int -> Int
+factorial n = productoria [1..n]
 
-multiplicaPares :: [Int] -> Int
-multiplicaPares xs = productoria (filter even xs)   --usar primera fun productoria no?
+--multiplicaPares :: [Int] -> Int       --(reemplazada en ejercicio 9)
+--multiplicaPares xs = productoria' (filter even xs) id
 
 
 
@@ -128,13 +128,16 @@ duplica' xs = map (*2) xs
 
 --EJERCICIO 9-----------------------------------------------
 
-sonpares :: [Int] -> [Int]
-sonpares [] = []
-sonpares (x:xs) | mod x 2 == 0 = x : sonpares xs
+sonPares :: [Int] -> [Int]
+sonPares [] = []
+sonPares (x:xs) | even x = x : sonpares xs
                 | otherwise = sonpares xs 
 
-sonpares' :: [Int] -> [Int]
-sonpares' xs = filter even xs
+sonPares' :: [Int] -> [Int]
+sonPares' xs = filter even xs
+
+multiplicaPares :: [Int] -> Int
+multiplicaPares xs = productoria' sonPares(xs) id
 
 
 
@@ -152,11 +155,6 @@ primIgualesA' a xs = takeWhile (== a) xs
 
 --EJERCICIO 11----------------------------------------------
 
---primIguales :: Eq (a) => [a] -> [a]
---primIguales [] = []
---primIguales (x:[]) = x : primIguales []
---primIguales (x:y:xs)  x == y = x : primIguales (y:xs)
-
 primIguales :: Eq (a) => [a] -> [a]
 primIguales [] = []
 primIguales (x:xs) | (xs!!0 == x) = x : primIguales xs 
@@ -173,7 +171,6 @@ cuantGen :: (b -> b -> b) -> b -> [a] -> (a -> b) -> b
 cuantGen op z [] t = z
 cuantGen op z (x:xs) t = op (t x) (cuantGen op z xs t)
 
-
 paratodo' :: [a] -> (a -> Bool) -> Bool
 paratodo' xs f = cuantGen (&&) (True) xs f 
 
@@ -188,7 +185,7 @@ productoria' xs f = cuantGen (*) (1) xs f
 
 
 
---EJERCICIO 13----------------------------------------------
+--EJERCICIO 13---------------------------------------------- FALTA
 
 --a, bien
 --b, mal, ((a,b):xs)
@@ -203,4 +200,11 @@ f [(0,a)] = 3
 
 
 --EJERCICIO 14----------------------------------------------
---aparte de la a, ninguna se puede porq no existen funciones q tienen cualquier input y el output es cualquiera pero distinto
+
+--A: se puede y no existe otra porque al no conocer el tipo, no se le pueden aplicar operaciones
+fA :: (a, b) -> b
+fA (x, y) = y
+
+--El resto no son posibles ya que todas involucran funciones del tipo (a -> b),
+--ya sea que el input es de tipo distinto al output o que como parametro tiene una funcion (a -> b)
+--No puede existir una funcion que devuelva cualquier otro tipo distinto al inicial
