@@ -29,11 +29,7 @@ productoria [] = 1
 productoria (x:xs) = x * (productoria xs)
 
 --factorial :: Int -> Int           --(reemplazada en ejercicio 6)
---factorial 0 = 1
---factorial n = n * (factorial (n-1))         --Si <0, infinitamente, o uso la de abajo?
-
---factorial :: Int -> Int
---factorial n | (n == 1) = 1
+--factorial n | (n == 0) = 1
 --            | (n > 1) = n * (factorial (n-1))
 
 promedio :: [Int] -> Int
