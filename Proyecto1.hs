@@ -1,7 +1,5 @@
 --Nombre Apellido, año, Comisión x
 
---El enunciado dice q se usa aplicación parcial, cuando?
-
 --EJERCICIO 1-----------------------------------------------
 
 esCero :: Int -> Bool
@@ -161,7 +159,8 @@ primIguales (x:xs) | (xs!!0 == x) = x : primIguales xs
                    | otherwise = [x]
 
 primIguales' :: Eq (a) => [a] -> [a]
-primIguales' xs = primIgualesA' (xs!!0) xs
+primIguales' [] = []
+primIguales' (x:xs) = primIgualesA' x (x:xs)
 
 
 
@@ -211,10 +210,21 @@ productoria' xs f = cuantGen (*) (1) xs f
 
 --EJERCICIO 14----------------------------------------------
 
---a: se puede y no existe otra porque al no conocer el tipo, no se le pueden aplicar operaciones
+--a: No existe otra porque al no conocer el tipo no se le pueden aplicar operaciones
 fA :: (a, b) -> b
 fA (x, y) = y
+--b: No puede existir una funcion que devuelva cualquier otro tipo distinto al inicial.
+--c: No existe otra porque al no conocer el tipo no se le pueden aplicar operaciones.
+fC :: (a -> b) -> a -> b
+fC f x = f x
+--d: Existe más de una definicion posible porque al involucar listas, 
+---- se pueden definir funciones que apliquen f a distintos elementos.
+fD :: (a -> b) -> [a] -> [b]
+fD f [] = []
+fD f (x:xs) = f x : (fD f xs)
 
---El resto no son posibles ya que todas involucran funciones del tipo (a -> b),
---ya sea que el input es de tipo distinto al output o que como parametro tiene una funcion (a -> b).
---No puede existir una funcion que devuelva cualquier otro tipo distinto al inicial.
+fD' :: (a -> b) -> [a] -> [b]
+fD' f (x:xs) = f x : []
+--e: No existe otra porque al no conocer el tipo no se le pueden aplicar operaciones.
+fE :: (a -> b) -> (b -> c) -> a -> c
+fE f g x = g (f x)
