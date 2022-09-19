@@ -103,13 +103,22 @@ primerElemento (x:xs) = Just x
 
 ------7
 data Cola = VaciaC | Encolada Persona Cola
+    deriving Show
+--borrar deriving show
 
 atender :: Cola -> Maybe Cola
 atender VaciaC = Nothing
 atender (Encolada p x) = Just x
 
+--atender :: Cola -> Maybe Cola
+--atender VaciaC = Nothing
+--atender (Encolada p VaciaC) = VaciaC
+--atender (Encolada p x) = Just (Encolada p (atender x))
+--funciona?? hace lo q le pido?
+
 encolar :: Persona -> Cola -> Cola
-encolar p c = (Encolada p) c
+encolar a VaciaC = (Encolada a) VaciaC
+encolar a (Encolada p c) = (Encolada p (encolar a c))
 
 busca :: Cola -> Cargo -> Maybe Persona
 busca VaciaC _ = Nothing
@@ -121,3 +130,17 @@ busca (Encolada p x) cargo = busca x cargo
 --Ver si funciona el 7, ver todos los deriving inutiles
 
 -----8
+data ListaAsoc a b = Vacia | Nodo a b ( ListaAsoc a b )
+type Diccionario = ListaAsoc String String
+type Padron = ListaAsoc Int String
+
+type GuiaTelefonica = ListaAsoc String Int
+
+la_long :: ListaAsoc a b -> Int
+la_long Vacia = 0
+la_long (Nodo a b xs) = 1 + la_long xs
+
+la_concat :: ListaAsoc a b -> ListaAsoc a b -> ListaAsoc a b
+la_concat Vacia ys = ys
+la_concat (Nodo a b xs) ys = (Nodo a b (la_concat xs ys))
+
