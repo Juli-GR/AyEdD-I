@@ -113,6 +113,10 @@ primerElemento (x:xs) = Just x
 
 --Ejercicio 7-----------------------------------------------------
 
+--Hay funciones que devuelven colas: le pongo deriving show?
+--No es necesario si no uso las funciones en la terminal(?
+--y siguen sirviendo para usar de parametro para otras
+--si estuviera mal, sacar show de persona etc
 data Cola = VaciaC | Encolada Persona Cola
 
 atender :: Cola -> Maybe Cola
