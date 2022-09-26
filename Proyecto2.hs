@@ -1,5 +1,5 @@
 data Carrera = Matematica | Fisica | Computacion | Astronomia
-    deriving (Eq, Show)
+    deriving Show
 
 titulo :: Carrera -> String
 titulo Matematica = "Licenciatura en Matemática"
@@ -40,21 +40,19 @@ type Ingreso = Int
 
 --tipo enumerado
 data Cargo = Titular | Asociado | Adjunto | Asistente | Auxiliar
-    deriving (Eq, Show)
+    deriving Show
 data Area = Administrativa | Ensenanza | Economica | Postgrado
-    deriving (Eq, Show)
+    deriving Show
 
 data Persona = Decane   --tipo algebraico
             |Docente Cargo
             |NoDocente Area
             |Estudiante Carrera Ingreso
-    deriving (Eq, Show)
+    deriving Show
 
 
 --tipo de docente   Docente :: Cargo -> Persona
 
---un quilombo pero no era ESTRICTAMENTE necesario el eq(???
--- si en cuantos_doc' lo uso, acá tmb???
 cuantos_doc :: [Persona] -> Cargo -> Int
 cuantos_doc [] c = 0
 cuantos_doc ((Docente Titular):xs) Titular = 1 + (cuantos_doc xs Titular)
@@ -64,17 +62,17 @@ cuantos_doc ((Docente Asistente):xs) Asistente = 1 + (cuantos_doc xs Asistente)
 cuantos_doc ((Docente Auxiliar):xs) Auxiliar = 1 + (cuantos_doc xs Auxiliar)
 cuantos_doc (x:xs) c = (cuantos_doc xs c)
 
---cuantos_doc :: [Persona] -> Cargo -> Int
---cuantos_doc [] c = 0
---cuantos_doc (x:xs) c
---    |x == (Docente c) = 1 + (cuantos_doc xs c)
---    |otherwise = (cuantos_doc xs c)
-
---Lo hago así???
---Tecnicamente puedo definir una funcion aparte que me lo haga sin Eq pero quilombo
 cuantos_doc' :: [Persona] -> Cargo -> Int
 cuantos_doc' [] c = 0
-cuantos_doc' xs c = length (filter (== Docente c) xs)
+cuantos_doc' xs c = length (filter (es_docente_c c) xs)
+
+es_docente_c :: Cargo -> Persona -> Bool
+es_docente_c Titular (Docente Titular) = True
+es_docente_c Asociado (Docente Asociado) = True
+es_docente_c Adjunto (Docente Adjunto) = True
+es_docente_c Asistente (Docente Asistente) = True
+es_docente_c Auxiliar (Docente Auxiliar) = True
+es_docente_c _ _ = False
 
 
 --Ejercicio 5-----------------------------------------------------
