@@ -113,7 +113,6 @@ primerElemento (x:xs) = Just x
 
 data Cola = VaciaC | Encolada Persona Cola
 
---usar case para q ande mas de un atender
 atender :: Cola -> Maybe Cola
 atender VaciaC = Nothing
 atender (Encolada p c) = Just c
@@ -173,9 +172,6 @@ la_borrar x Vacia = Vacia
 la_borrar x (Nodo a b la)
   |x==a = la_borrar x la
   |otherwise = Nodo a b (la_borrar x la)
-
---PREGUNTA cuando usas case?????? ni lo usé
---tmp uso derivings? o si?
 
 
 --Ejercicio 9-----------------------------------------------------
