@@ -1,0 +1,230 @@
+--1
+#include <stdio.h>
+#include <assert.h>
+
+int pideNumero(void){
+  int n;
+  printf("Ingrese un valor para n:\n");
+  scanf("%d", &n);
+  assert(n > 0);
+  return n;
+}
+
+void holaHasta(int n){
+  int i=0;
+  while (i < n){
+    printf("Hola\n");
+    i = i + 1;
+  }
+}
+
+int main(void){
+  holaHasta(pideNumero());
+  return 0;
+}
+
+
+
+
+
+
+--2a
+  #include <stdio.h>
+
+int pideNumero(void){
+  int x;
+  printf("Ingrese un valor:\n");
+  scanf("%d", &x);
+  return x;
+}
+
+int main(void){
+  int x, y;
+  x = pideNumero();
+  y = pideNumero();
+  int xaux = x;
+  x = x + 1;
+  y = xaux + y;
+  printf("x: %d, y:%d\n", x, y);
+  return 0;
+}
+
+
+
+
+
+
+--2b
+#include <stdio.h>
+
+int pideNumero(void){
+  int x;
+  printf("Ingrese un valor:\n");
+  scanf("%d", &x);
+  return x;
+}
+
+int main(void){
+  int x, y, z;
+  x = pideNumero();
+  y = pideNumero();
+  z = pideNumero();
+  int xaux = x;
+  int yaux = y;
+  x = y;
+  y = xaux + y + z;
+  z = xaux + yaux;
+  printf("x: %d, y: %d, z: %d\n", x, y, z);
+  return 0;
+}
+
+
+
+
+
+-3
+  #include <stdio.h>
+#include <assert.h>
+
+int suma_hasta(int N){
+  return( N*(N+1) /2 );
+}
+
+int pideNumero(void){
+  int x;
+  printf("Ingrese un valor:\n");
+  scanf("%d", &x);
+  return x;
+}
+
+int main(void){
+  int N = pideNumero();
+  assert(N>=0);
+  printf("suma hasta N: %d\n", suma_hasta(N));
+  return 0;
+}
+
+
+
+
+
+
+
+--4
+  #include <stdio.h>
+#include <assert.h>
+
+int pideNumero(void){
+  int x;
+  printf("Ingrese un valor:\n");
+  scanf("%d", &x);
+  return x;
+}
+
+struct div_t {
+  int cociente;
+  int resto;
+};
+
+struct div_t division(int x, int y){
+  struct div_t dupla;
+  dupla.cociente = x/y;
+  dupla.resto = x%y;
+  return(dupla);
+}
+
+int main(void){
+  int x, y;
+  struct div_t dupla;
+  x = pideNumero();
+  y = pideNumero();
+  assert(x >= 0 && y >= 0);
+  if (y == 0){
+    printf("No se puede dividir por 0\n");
+  }
+  else {
+    dupla = division(x, y);
+    printf("cociente: %d, resto: %d\n", dupla.cociente, dupla.resto);
+  }
+  return 0;
+}
+
+
+
+
+
+
+
+--5
+  #include <stdio.h>
+#define N 3
+
+void pedirArreglo(int a[], int n_max){
+  int i = 0;
+  int x;
+  while (i < n_max){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+}
+
+void imprimeArreglo(int a[], int n_max){
+  int i = 0;
+  while (i<n_max){
+    printf("a[%d] = %d\n", i, a[i]);
+    i = i+1;
+  }
+}
+
+int main(void){
+  int a[N];
+  pedirArreglo(a, N);
+  imprimeArreglo(a, N);
+  return 0;
+}
+
+
+
+
+
+
+--6
+  #include <stdio.h>
+#define N 3
+
+void pedirArreglo(int a[], int n_max){
+  int i = 0;
+  int x;
+  while (i < n_max){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+}
+
+void imprimeArreglo(int a[], int n_max){
+  int i = 0;
+  while (i<n_max){
+    printf("a[%d] = %d\n", i, a[i]);
+    i = i+1;
+  }
+}
+
+int sumatoria(int a[], int tam){
+  int suma;
+  int i = 0;
+  while (i < tam){
+    suma = suma + a[i];
+    i = i+1;
+  }
+}
+
+int main(void){
+  int a[N];
+  pedirArreglo(a, N);
+  imprimeArreglo(a, N);
+  return 0;
+}
