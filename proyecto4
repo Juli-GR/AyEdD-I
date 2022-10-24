@@ -217,3 +217,50 @@ int main(void){
   printf("Sumatoria: %d\n", sumatoria(a, N));
   return 0;
 }
+
+
+
+
+
+
+
+--7
+#include <stdio.h>
+#include <stdbool.h>
+#define N 3
+
+bool existe_positivo(int a[], int tam){
+  int i = 0;
+  while (i < tam){
+    if (a[i] > 0) {return true;}
+    i = i + 1;
+  }
+  return false;
+}
+
+bool todos_positivos(int a[], int tam){
+  int i = 0;
+  while (i < tam){
+    if (a[i] < 0) {return false;}
+    i = i + 1;
+  }
+  return true;
+}
+
+int main(void){
+  int a[N];
+  int i = 0;
+  int x;
+  while (i < N){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+  int eleccion;
+  printf("Ingrese 1 para existe_positivo o 2 para todos_positivos:\n");
+  scanf("%d", &eleccion);
+  if (eleccion == 1){printf("%d\n", existe_positivo(a, N));}
+  else {printf("%d\n", todos_positivos(a, N));}
+  return 0;
+}
