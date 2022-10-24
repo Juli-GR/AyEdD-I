@@ -191,40 +191,29 @@ int main(void){
 
 
 --6
-  #include <stdio.h>
+#include <stdio.h>
 #define N 3
 
-void pedirArreglo(int a[], int n_max){
-  int i = 0;
-  int x;
-  while (i < n_max){
-    printf("Ingrese un valor para el elemento %d:\n", i);
-    scanf("%d", &x);
-    a[i] = x;
-    i = i+1;
-  }
-}
-
-void imprimeArreglo(int a[], int n_max){
-  int i = 0;
-  while (i<n_max){
-    printf("a[%d] = %d\n", i, a[i]);
-    i = i+1;
-  }
-}
-
 int sumatoria(int a[], int tam){
-  int suma;
+  int suma = 0;
   int i = 0;
   while (i < tam){
     suma = suma + a[i];
     i = i+1;
   }
+  return suma;
 }
 
 int main(void){
   int a[N];
-  pedirArreglo(a, N);
-  imprimeArreglo(a, N);
+  int i = 0;
+  int x;
+  while (i < N){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+  printf("Sumatoria: %d\n", sumatoria(a, N));
   return 0;
 }
