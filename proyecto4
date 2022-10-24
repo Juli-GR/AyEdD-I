@@ -264,3 +264,59 @@ int main(void){
   else {printf("%d\n", todos_positivos(a, N));}
   return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+--8
+#include <stdio.h>
+#include <assert.h>
+#define N 3
+
+void imprimeArreglo(int a[], int n_max){
+  int i = 0;
+  while (i<n_max){
+    printf("a[%d] = %d\n", i, a[i]);
+    i = i+1;
+  }
+}
+
+void intercambiar(int a[], int tam, int i, int j){
+  assert(0 <= i && i < tam);
+  assert(0 <= j && j < tam);
+  int aux = a[i];
+  a[i] = a[j];
+  a[j] = aux;
+}
+
+int main(void){
+  int a[N];
+  int i = 0;
+  int x;
+  while (i < N){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+  int pos_i, pos_j;
+  printf("Ingrese la primer posicion:\n");
+  scanf("%d", &pos_i);
+  printf("Ingrese la segunda posicion:\n");
+  scanf("%d", &pos_j);
+  intercambiar(a, N, pos_i, pos_j);
+  imprimeArreglo(a, N);
+  return 0;
+}
+
+/*a los prints hacerlos con fun con parametro char
+tambien sacar el while del main
+hacerlo lo mas limpio posible*/
