@@ -1,10 +1,10 @@
---1
+/* 1: ejercicio01.c */
 #include <stdio.h>
 #include <assert.h>
 
-int pideNumero(void){
+int pideNumero(char c){
   int n;
-  printf("Ingrese un valor para n:\n");
+  printf("Ingrese un valor para %c:\n", c);
   scanf("%d", &n);
   assert(n > 0);
   return n;
@@ -19,7 +19,7 @@ void holaHasta(int n){
 }
 
 int main(void){
-  holaHasta(pideNumero());
+  holaHasta(pideNumero('n'));
   return 0;
 }
 
@@ -28,20 +28,20 @@ int main(void){
 
 
 
---2a
-  #include <stdio.h>
+/* 2a: multiple1.c */
+#include <stdio.h>
 
-int pideNumero(void){
+int pideNumero(char c){
   int x;
-  printf("Ingrese un valor:\n");
+  printf("Ingrese un valor para %c:\n", c);
   scanf("%d", &x);
   return x;
 }
 
 int main(void){
   int x, y;
-  x = pideNumero();
-  y = pideNumero();
+  x = pideNumero('x');
+  y = pideNumero('y');
   int xaux = x;
   x = x + 1;
   y = xaux + y;
@@ -54,21 +54,21 @@ int main(void){
 
 
 
---2b
+/* 2b: multiple2.c */
 #include <stdio.h>
 
-int pideNumero(void){
+int pideNumero(char c){
   int x;
-  printf("Ingrese un valor:\n");
+  printf("Ingrese un valor para %c:\n", c);
   scanf("%d", &x);
   return x;
 }
 
 int main(void){
   int x, y, z;
-  x = pideNumero();
-  y = pideNumero();
-  z = pideNumero();
+  x = pideNumero('x');
+  y = pideNumero('y');
+  z = pideNumero('z');
   int xaux = x;
   int yaux = y;
   x = y;
@@ -82,23 +82,23 @@ int main(void){
 
 
 
--3
-  #include <stdio.h>
+/* 3: suma hasta.c */
+#include <stdio.h>
 #include <assert.h>
 
 int suma_hasta(int N){
   return( N*(N+1) /2 );
 }
 
-int pideNumero(void){
+int pideNumero(char c){
   int x;
-  printf("Ingrese un valor:\n");
+  printf("Ingrese un valor para %c:\n", c);
   scanf("%d", &x);
   return x;
 }
 
 int main(void){
-  int N = pideNumero();
+  int N = pideNumero('N');
   assert(N>=0);
   printf("suma hasta N: %d\n", suma_hasta(N));
   return 0;
@@ -109,14 +109,13 @@ int main(void){
 
 
 
-
---4
-  #include <stdio.h>
+/* 4: division.c */
+#include <stdio.h>
 #include <assert.h>
 
-int pideNumero(void){
+int pideNumero(char c){
   int x;
-  printf("Ingrese un valor:\n");
+  printf("Ingrese un valor para %c:\n", c);
   scanf("%d", &x);
   return x;
 }
@@ -136,12 +135,10 @@ struct div_t division(int x, int y){
 int main(void){
   int x, y;
   struct div_t dupla;
-  x = pideNumero();
-  y = pideNumero();
+  x = pideNumero('x');
+  y = pideNumero('y');
   assert(x >= 0 && y >= 0);
-  if (y == 0){
-    printf("No se puede dividir por 0\n");
-  }
+  if (y == 0) { printf("No se puede dividir por 0\n"); }
   else {
     dupla = division(x, y);
     printf("cociente: %d, resto: %d\n", dupla.cociente, dupla.resto);
@@ -155,8 +152,10 @@ int main(void){
 
 
 
---5
-  #include <stdio.h>
+/* 5: imprime_arreglos.c */
+/* Fijé el tamaño del arreglo ya que
+no se especificaba como obtener el tamaño */
+#include <stdio.h>
 #define N 3
 
 void pedirArreglo(int a[], int n_max){
@@ -190,9 +189,20 @@ int main(void){
 
 
 
---6
+/* 6: sumatoria.c */
 #include <stdio.h>
 #define N 3
+
+void pedirArreglo(int a[], int n_max){
+  int i = 0;
+  int x;
+  while (i < n_max){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+}
 
 int sumatoria(int a[], int tam){
   int suma = 0;
@@ -206,14 +216,7 @@ int sumatoria(int a[], int tam){
 
 int main(void){
   int a[N];
-  int i = 0;
-  int x;
-  while (i < N){
-    printf("Ingrese un valor para el elemento %d:\n", i);
-    scanf("%d", &x);
-    a[i] = x;
-    i = i+1;
-  }
+  pedirArreglo(a, N);
   printf("Sumatoria: %d\n", sumatoria(a, N));
   return 0;
 }
@@ -224,10 +227,21 @@ int main(void){
 
 
 
---7
+/* 7: positivos.c */
 #include <stdio.h>
 #include <stdbool.h>
 #define N 3
+
+void pedirArreglo(int a[], int n_max){
+  int i = 0;
+  int x;
+  while (i < n_max){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+}
 
 bool existe_positivo(int a[], int tam){
   int i = 0;
@@ -249,21 +263,13 @@ bool todos_positivos(int a[], int tam){
 
 int main(void){
   int a[N];
-  int i = 0;
-  int x;
-  while (i < N){
-    printf("Ingrese un valor para el elemento %d:\n", i);
-    scanf("%d", &x);
-    a[i] = x;
-    i = i+1;
-  }
+  pedirArreglo(a, N);
   int eleccion;
   printf("Ingrese 1 para existe_positivo o 2 para todos_positivos:\n");
   scanf("%d", &eleccion);
   if (eleccion == 1){printf("%d\n", existe_positivo(a, N));}
   else {printf("%d\n", todos_positivos(a, N));}
   return 0;
-}
 
 
 
@@ -276,10 +282,28 @@ int main(void){
 
 
 
---8
+/* 8: intercambio_arreglos.c */
 #include <stdio.h>
 #include <assert.h>
 #define N 3
+
+void pedirArreglo(int a[], int n_max){
+  int i = 0;
+  int x;
+  while (i < n_max){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+}
+
+int pideNumero(int i){
+  int n;
+  printf("Ingrese la posición %d:\n", i);
+  scanf("%d", &n);
+  return n;
+}
 
 void imprimeArreglo(int a[], int n_max){
   int i = 0;
@@ -299,24 +323,367 @@ void intercambiar(int a[], int tam, int i, int j){
 
 int main(void){
   int a[N];
+  pedirArreglo(a, N);
+  intercambiar(a, N, pideNumero(2), pideNumero(1));
+  imprimeArreglo(a, N);
+  return 0;
+}
+
+
+
+
+
+
+
+/* 9: minimos.c */
+#include <stdio.h>
+#include <limits.h>
+#define N 4
+
+void pedirArreglo(int a[], int n_max){
   int i = 0;
   int x;
-  while (i < N){
+  while (i < n_max){
     printf("Ingrese un valor para el elemento %d:\n", i);
     scanf("%d", &x);
     a[i] = x;
     i = i+1;
   }
-  int pos_i, pos_j;
-  printf("Ingrese la primer posicion:\n");
-  scanf("%d", &pos_i);
-  printf("Ingrese la segunda posicion:\n");
-  scanf("%d", &pos_j);
-  intercambiar(a, N, pos_i, pos_j);
-  imprimeArreglo(a, N);
+}
+
+int minimo_pares(int a[], int tam){
+  int i = 0;
+  int min = INT_MAX;
+  while (i < tam){
+    if (a[i]<min && a[i]%2==0){
+    min = a[i];
+    }
+    i = i + 1;
+  }
+  return min;
+}
+
+int minimo_impares(int a[], int tam){
+  int i = 0;
+  int min = INT_MAX;
+  while (i < tam){
+    if (a[i]<min && a[i]%2!=0){
+    min = a[i];
+    }
+    i = i + 1;
+  }
+  return min;
+}
+
+int main(void){
+  int a[N];
+  pedirArreglo(a, N);
+  int min_p = minimo_pares(a, N);
+  int min_i = minimo_impares(a, N);
+  if (min_p < min_i){ printf("El mínimo es: %d\n", min_p); }
+  else { printf("El mínimo es: %d\n", min_i); }
   return 0;
 }
 
-/*a los prints hacerlos con fun con parametro char
-tambien sacar el while del main
-hacerlo lo mas limpio posible*/
+
+
+
+
+
+/* 10: cuantos.c */
+#include <stdio.h>
+#define N 5
+
+struct comp_t {
+  int menores;
+  int iguales;
+  int mayores;
+};
+
+void pedirArreglo(int a[], int n_max){
+  int i = 0;
+  int x;
+  while (i < n_max){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%d", &x);
+    a[i] = x;
+    i = i+1;
+  }
+}
+
+int pideNumero(void){
+  int n;
+  printf("Ingrese un valor para comparar:\n");
+  scanf("%d", &n);
+  return n;
+}
+
+struct comp_t cuantos(int a[], int tam, int elem){
+  struct comp_t comp_elem;
+  int i = 0;
+  comp_elem.iguales = 0;
+  comp_elem.menores = 0;
+  comp_elem.mayores = 0;
+  while (i < tam){
+    if (a[i] == elem) { comp_elem.iguales ++; }
+    else {
+      if (a[i] < elem) { comp_elem.menores ++; }
+      else { comp_elem.mayores ++; }
+    }
+    i = i + 1;
+  }
+  return comp_elem;
+}
+
+int main(void){
+  int a[N];
+  pedirArreglo(a, N);
+  struct comp_t comp_elem = cuantos(a, N, pideNumero());
+  printf("%d menores, %d iguales y %d mayores\n", \
+  comp_elem.menores, comp_elem.iguales, comp_elem.mayores);
+  return 0;
+}
+
+
+
+
+
+
+
+/* 11: stats.c */
+#include <stdio.h>
+#define N 5
+
+struct datos_t {
+  float maximo;
+  float minimo;
+  float promedio;
+};
+
+void pedirArreglo(float a[], int n_max){
+  int i = 0;
+  float x;
+  while (i < n_max){
+    printf("Ingrese un valor para el elemento %d:\n", i);
+    scanf("%f", &x);
+    a[i] = x;
+    i = i+1;
+  }
+}
+
+struct datos_t stats(float a[], int tam){
+  struct datos_t datos_a;
+  datos_a.maximo = a[0];
+  datos_a.minimo = a[0];
+  datos_a.promedio = a[0]/tam;
+  int i = 1;
+  while (i < tam){
+    if (datos_a.maximo < a[i]) { datos_a.maximo = a[i]; }
+    else { if (datos_a.minimo > a[i]) { datos_a.minimo = a[i]; } }
+    datos_a.promedio = datos_a.promedio + a[i]/tam;
+    i = i + 1;
+  }
+  return datos_a;
+}
+
+int main(void){
+  float a[N];
+  pedirArreglo(a, N);
+  struct datos_t datos_a = stats(a, N);
+  printf("máximo: %.2f, minimo: %.2f, promedio: %.2f\n", \
+  datos_a.maximo, datos_a.minimo, datos_a.promedio );
+  return 0;
+}
+
+
+
+
+
+
+/* 12: asoc.c */
+#include <stdio.h>
+#include <stdbool.h>
+#define N 3
+
+typedef char clave_t;
+typedef int valor_t;
+
+struct asoc {
+  clave_t clave;
+  valor_t valor;
+};
+
+void pedirArreglo(struct asoc a[], int n_max){
+  int i = 0;
+  clave_t c;
+  valor_t v;
+  printf("Ingrese los siguientes valores (clave: char, valor: int):\n");
+  while (i < n_max){
+    printf("Clave %d:\n", i);
+    scanf(" %c", &c);
+    a[i].clave = c;
+    printf("Valor %d:\n", i);
+    scanf("%d", &v);
+    a[i].valor = v;
+    i = i+1;
+  }
+}
+
+bool asoc_existe(struct asoc a[], int tam, clave_t c){
+  int i = 0;
+  while (i < tam) {
+    if (a[i].clave == c) { return true; }
+    i = i+1;
+  }
+  return false;
+}
+
+clave_t pideClave(void){
+  clave_t c;
+  printf("Ingrese la clave buscada:\n");
+  scanf(" %c", &c);
+  return c;
+}
+
+int main(void){
+  struct asoc a[N];
+  pedirArreglo(a, N);
+  if (asoc_existe(a, N, pideClave())) { printf("Existe la clave\n"); }
+  else { printf("No existe la clave\n"); }
+  return 0;
+}
+
+
+
+
+
+
+/* 13a: primo_a.c */
+#include <stdio.h>
+
+int pideNumero(char c){
+  int n;
+  printf("Ingrese un valor para %c:\n", c);
+  scanf("%d", &n);
+  return n;
+}
+
+int nesimo_primo(int N){
+  int primos = 0;
+  int x=1;
+  while (primos < N) {
+    x ++;
+    int i=2;
+    while (x%i!=0) { i ++; }
+    if (i==x) { primos ++; }
+  }
+  return x;
+}
+
+/* Se tomó que el primo nro 0 no existe y el nro 1 es 2 */
+
+int main(void){
+  int n = pideNumero('n');
+  if (n>0) { printf("el primo numero %d es: %d\n", n, nesimo_primo(n)); }
+  else { printf("Error: n debe ser positivo\n"); }
+  return 0;
+}
+
+
+
+
+
+
+/* 13b: primo_b.c */
+#include <stdio.h>
+
+int pideNat(char c){
+  int n;
+  printf("Ingrese un valor para %c:\n", c);
+  scanf("%d", &n);
+  while (n<=0) {
+    printf("n debe ser positivo, vuelva a ingresar %c:\n", c);
+    scanf("%d", &n);
+  }
+  return n;
+}
+
+int nesimo_primo(int N){
+  int primos = 0;
+  int x=1;
+  while (primos < N) {
+    x ++;
+    int i=2;
+    while (x%i!=0) { i ++; }
+    if (i==x) { primos ++; }
+  }
+  return x;
+}
+
+/* Se tomó que el primo nro 0 no existe y el nro 1 es 2 */
+
+int main(void){
+  int n = pideNat('n');
+  printf("el primo numero %d es: %d\n", n, nesimo_primo(n));
+  return 0;
+}
+
+
+
+
+
+
+
+/* 14: estrella.c */
+#include <stdio.h>
+
+typedef struct _persona {
+  char *nombre;
+  int edad;
+  float altura;
+  float peso;
+} persona_t;
+
+float peso_promedio(persona_t arr[], unsigned int longitud){
+  float peso = 0;
+  unsigned int i = 0;
+  while (i<longitud){
+    peso = peso + arr[i].peso/longitud;
+    i ++;
+  }
+  return peso;
+}
+
+persona_t persona_de_mayor_edad(persona_t arr[], unsigned int longitud){
+  persona_t mayor = arr[0];
+  unsigned int i = 1;
+  while (i<longitud) {
+    if (arr[i].edad > mayor.edad) { mayor = arr[i]; }
+    i ++;
+  }
+  return mayor;
+}
+
+persona_t persona_de_menor_altura(persona_t arr[], unsigned int longitud){
+  persona_t mas_bajo = arr[0];
+  unsigned int i = 1;
+  while (i<longitud) {
+    if (arr[i].altura < mas_bajo.altura) { mas_bajo = arr[i]; }
+    i ++;
+  }
+  return mas_bajo;
+}
+
+int main(void) {
+persona_t p1 = {"Paola", 21, 1.85, 75};
+persona_t p2 = {"Luis", 54, 1.75, 69};
+persona_t p3 = {"Julio", 40, 1.70, 80};
+unsigned int longitud = 3;
+persona_t arr[] = {p1, p2, p3};
+printf("El peso promedio es %f\n", peso_promedio(arr, longitud));
+persona_t p = persona_de_mayor_edad(arr, longitud);
+printf("El nombre de la persona con mayor edad es %s\n", p.nombre);
+p = persona_de_menor_altura(arr, longitud);
+printf("El nombre de la persona con menor altura es %s\n", p.nombre);
+return 0;
+}
