@@ -1,4 +1,4 @@
-/* 1: ejercicio01.c */
+/* 1a: ejercicio01.c */
 #include <stdio.h>
 #include <assert.h>
 
@@ -24,6 +24,78 @@ int main(void){
 }
 
 
+
+
+
+/* 1b(i): minimo.c */
+#include <assert.h>
+
+/* Decidí definir valores para x e y en el código
+ya que no especifica como obtenerlos */
+
+int maximo(int x, int y){
+  int max;
+  if (x > y) { max = x; }
+  else { max = y; }
+  return max;
+}
+
+int main(void){
+  int x = 2;
+  int y = 3;
+  /* pre: x=X ^ y=Y (defino variables para verificar) */
+  int X = x;
+  int Y = y;
+  assert(x==X && y==Y);
+  int res = maximo(x, y);
+  assert(res == maximo(X, Y)); /*post: res = X max Y */
+  return 0;
+}
+
+
+
+
+
+/* 1b(ii): absoluto.c */
+#include <assert.h>
+
+int abs(int x){
+  int absoluto;
+  if (x>=0) {absoluto = x;}
+  else {absoluto = -x;}
+  return absoluto;
+}
+
+int main(void){
+  int x = -3;
+  int res;
+  int X = x;
+  assert(X==x);
+  res = abs(x);
+  assert(res == abs(x));
+}
+
+
+
+
+
+/* 1b(iii): swap.c */
+#include <assert.h>
+
+int main(void){
+  int x = 1;
+  int y = 2;
+  int z = 3;
+  int X = x;
+  int Y = y;
+  int Z = z;
+  assert(x==X && y==Y && z==Z);
+  z = X;
+  x = Y;
+  y = Z;
+  assert(z==X && x==Y && y==Z);
+  return 0;
+}
 
 
 
